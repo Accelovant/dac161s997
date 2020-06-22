@@ -108,6 +108,7 @@ error_t dac161s997_set_alarm(dac161s997_dev_t *dev, DAC161S997_ALARM_t alarm)
     else if (alarm == DAC161S997_ALARM_HIGH_FAIL) {
         return dac161s997_write_reg(dev, DAC161S997_DACCODE_REG,
                                     _NA_TO_DAC_TICKS(DAC161S997_FAIL_HI_ALARM_NA));
+    }
     return -EINVAL;
 }
 

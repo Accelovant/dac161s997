@@ -20,6 +20,17 @@
 #define _NOT_PROTECTED                  0
 #define _PROTECTED                      1
 
+/* Minimum and maximum valid output current in nA *****************************/
+#define DAC161S997_MIN_NA   ((uint32_t)4000000)     /**< Min valid nA */
+#define DAC161S997_MAX_NA   ((uint32_t)20000000)    /**< Max valid nA */
+
+/* Error levels as per NAMUR NE43 *********************************************/
+#define DAC161S997_UNINIT_ALARM_NA  ((uint32_t)3300000)  /**< Uninitialized value in nA */
+#define DAC161S997_FAIL_LO_ALARM_NA ((uint32_t)3600000)  /**< Lo error value in nA */
+#define DAC161S997_SAT_LO_ALARM_NA  ((uint32_t)3800000)  /**< Lo saturation value in nA */
+#define DAC161S997_SAT_HI_ALARM_NA  ((uint32_t)20500000) /**< Hi saturation value in nA */
+#define DAC161S997_FAIL_HI_ALARM_NA ((uint32_t)21000000) /**< Hi error value in nA */
+
 #define _ERR_CONFIG_SPI_TIMOUT_400MS    (7 << 1)
 
 /******************************************************************************/
@@ -55,19 +66,19 @@ error_t dac161s997_init(dac161s997_dev_t *dev)
 
     err =
         dac161s997_write_reg(dev, DAC161S997_ERR_LOW_REG, _NA_TO_DAC_TICKS(
-                                 DAC161S997_LO_ALARM_NA));
+                                 DAC161S997_FAIL_LO_ALARM_NA));
     if (err) {
         return err;
     }
 
     err =
         dac161s997_write_reg(dev, DAC161S997_ERR_HIGH_REG, _NA_TO_DAC_TICKS(
-                                 DAC161S997_HI_ALARM_NA));
+                                 DAC161S997_FAIL_HI_ALARM_NA));
     if (err) {
         return err;
     }
 
-    err = dac161s997_set_alarm(dev, DAC161S997_ALARM_LOW);
+    err = dac161s997_set_alarm(dev, DAC161S997_ALARM_LOW_FAIL);
     return err;
 }
 
@@ -82,14 +93,21 @@ error_t dac161s997_set_output(dac161s997_dev_t *dev, int32_t n_amps)
 
 error_t dac161s997_set_alarm(dac161s997_dev_t *dev, DAC161S997_ALARM_t alarm)
 {
-    if (alarm == DAC161S997_ALARM_LOW) {
+    if (alarm == DAC161S997_ALARM_LOW_FAIL) {
         return dac161s997_write_reg(dev, DAC161S997_DACCODE_REG,
-                                    _NA_TO_DAC_TICKS(DAC161S997_LO_ALARM_NA));
+                                    _NA_TO_DAC_TICKS(DAC161S997_FAIL_LO_ALARM_NA));
     }
-    else if (alarm == DAC161S997_ALARM_HIGH) {
+    else if (alarm == DAC161S997_ALARM_LOW_SAT) {
         return dac161s997_write_reg(dev, DAC161S997_DACCODE_REG,
-                                    _NA_TO_DAC_TICKS(DAC161S997_HI_ALARM_NA));
+                                    _NA_TO_DAC_TICKS(DAC161S997_SAT_LO_ALARM_NA));
     }
+    else if (alarm == DAC161S997_ALARM_HIGH_SAT) {
+        return dac161s997_write_reg(dev, DAC161S997_DACCODE_REG,
+                                    _NA_TO_DAC_TICKS(DAC161S997_SAT_HI_ALARM_NA));
+    }
+    else if (alarm == DAC161S997_ALARM_HIGH_FAIL) {
+        return dac161s997_write_reg(dev, DAC161S997_DACCODE_REG,
+                                    _NA_TO_DAC_TICKS(DAC161S997_FAIL_HI_ALARM_NA));
     return -EINVAL;
 }
 

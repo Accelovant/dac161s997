@@ -20,10 +20,6 @@
 #define _NOT_PROTECTED                  0
 #define _PROTECTED                      1
 
-/* Minimum and maximum valid output current in nA *****************************/
-#define DAC161S997_MIN_NA   ((uint32_t)4000000)     /**< Min valid nA */
-#define DAC161S997_MAX_NA   ((uint32_t)20000000)    /**< Max valid nA */
-
 /* Error levels as per NAMUR NE43 *********************************************/
 #define DAC161S997_UNINIT_ALARM_NA  ((uint32_t)3300000)  /**< Uninitialized value in nA */
 #define DAC161S997_FAIL_LO_ALARM_NA ((uint32_t)3600000)  /**< Lo error value in nA */

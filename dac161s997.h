@@ -22,11 +22,14 @@
 #define DAC161S997_H_
 
 /* Defines ********************************************************************/
-#define DAC161S997_ALARM_LOW_FAIL_ERR   0x0100
-#define DAC161S997_ALARM_LOW_SAT_ERR    0x0200
-#define DAC161S997_ALARM_UNINIT_ERR    0x0400
-#define DAC161S997_ALARM_HI_SAT_ERR     0x0800
-#define DAC161S997_ALARM_HI_FAIL_ERR    0x1000
+#define DAC161S997_MIN_NA   ((uint32_t)4000000)     /**< Min valid nA */
+#define DAC161S997_MAX_NA   ((uint32_t)20000000)    /**< Max valid nA */
+
+#define DAC161S997_ALARM_LOW_FAIL_ERR   0x0100 /**< Error flag for low device failure */
+#define DAC161S997_ALARM_LOW_SAT_ERR    0x0200 /**< Error flag for value set to lower bound saturation */
+#define DAC161S997_ALARM_UNINIT_ERR     0x0400 /**< Error flag for device uninitialized */
+#define DAC161S997_ALARM_HI_SAT_ERR     0x0800 /**< Error flag for value set to upper bound saturation */
+#define DAC161S997_ALARM_HI_FAIL_ERR    0x1000 /**< Error flag for high device failure */
 
 /**
  * @defgroup I420_STATUS_MASK
@@ -42,11 +45,11 @@
 
 /* Typedefs *******************************************************************/
 typedef enum {
-    DAC161S997_ALARM_LOW_FAIL   = DAC161S997_ALARM_LOW_FAIL_ERR ,
-    DAC161S997_ALARM_LOW_SAT    = DAC161S997_ALARM_LOW_SAT_ERR ,
-    DAC161S997_ALARM_UNINIT     = DAC161S997_ALARM_UNINIT_ERR ,
-    DAC161S997_ALARM_HIGH_SAT   = DAC161S997_ALARM_HI_SAT_ERR,
-    DAC161S997_ALARM_HIGH_FAIL  = DAC161S997_ALARM_HI_FAIL_ERR ,
+    DAC161S997_ALARM_LOW_FAIL   = DAC161S997_ALARM_LOW_FAIL_ERR,    /**< Alarm for low device failure */
+    DAC161S997_ALARM_LOW_SAT    = DAC161S997_ALARM_LOW_SAT_ERR,     /**< Alarm for value set to lower bound saturation */
+    DAC161S997_ALARM_UNINIT     = DAC161S997_ALARM_UNINIT_ERR,      /**< Alarm for device uninitialized */
+    DAC161S997_ALARM_HIGH_SAT   = DAC161S997_ALARM_HI_SAT_ERR,      /**< Alarm for value set to upper bound saturation */
+    DAC161S997_ALARM_HIGH_FAIL  = DAC161S997_ALARM_HI_FAIL_ERR,     /**< Alarm for high device failure */
 } DAC161S997_ALARM_t;       /**< DAC161S997 alarm types */
 
 /**

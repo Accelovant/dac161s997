@@ -9,6 +9,7 @@
 #include <errno.h>
 
 #include "dac161s997.h"
+#include "dac161s997_port.h"
 #include "internal/dac161s997_regs.h"
 
 /* Private macros *************************************************************/
@@ -32,9 +33,9 @@
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
-error_t dac161s997_init(dac161s997_dev_t *dev)
+int dac161s997_init(dac161s997_dev_t *dev)
 {
-    error_t err = 0;
+    int err = 0;
 
     err =
         dac161s997_write_reg(dev, DAC161S997_RESET_REG, _DAC_CHIP_RESET_CODE);
@@ -78,7 +79,7 @@ error_t dac161s997_init(dac161s997_dev_t *dev)
     return err;
 }
 
-error_t dac161s997_set_output(dac161s997_dev_t *dev, int32_t n_amps)
+int dac161s997_set_output(dac161s997_dev_t *dev, int32_t n_amps)
 {
     if (n_amps < DAC161S997_MIN_NA || n_amps > DAC161S997_MAX_NA) {
         return -EINVAL;
@@ -87,7 +88,7 @@ error_t dac161s997_set_output(dac161s997_dev_t *dev, int32_t n_amps)
                                 _NA_TO_DAC_TICKS(n_amps));
 }
 
-error_t dac161s997_set_alarm(dac161s997_dev_t *dev, DAC161S997_ALARM_t alarm)
+int dac161s997_set_alarm(dac161s997_dev_t *dev, DAC161S997_ALARM_t alarm)
 {
     if (alarm == DAC161S997_ALARM_LOW_FAIL) {
         return dac161s997_write_reg(dev, DAC161S997_DACCODE_REG,
@@ -108,11 +109,11 @@ error_t dac161s997_set_alarm(dac161s997_dev_t *dev, DAC161S997_ALARM_t alarm)
     return -EINVAL;
 }
 
-error_t dac161s997_get_status(dac161s997_dev_t *dev, uint32_t *status)
+int dac161s997_get_status(dac161s997_dev_t *dev, uint32_t *status)
 {
     uint16_t data;
     uint16_t alarm;
-    error_t err = 0;
+    int err = 0;
 
     /* Reset status each call so errors are not sticky */
     *status = 0;

@@ -1,0 +1,22 @@
+{
+  "name": "dac161s997",
+  "version": "0.0.1",
+  "description": "Platform independent driver for the DAC161S997 4/20mA driver chip",
+  "keywords": "dac, drive, DAC161S997, 4to20mA",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/MrKevinWeiss/acc-dac161s997.git"
+  },
+  "authors":
+  [
+    {
+      "name": "Kevin Weiss",
+      "email": "kevin.weiss604@gmail.com",
+      "url": "https://github.com/MrKevinWeiss"
+    }
+  ],
+  "license": "MIT",
+  "frameworks": "*",
+  "platforms": "*"
+}

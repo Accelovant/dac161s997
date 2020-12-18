@@ -5,10 +5,18 @@ This provides some basic functions to the driver and is implemented in a portabl
 
 ## Driver API
 
-The driver API is defined in the [dac161s997.h](dac161s997.h) file.
+The driver API is defined in the [dac161s997.h](include/dac161s997.h) file.
 
 ## Build System
-The build system should include just the module as the API header is located at the root and the source files are located in `src`.
+
+### PlatformIO
+The library can be imported with platformio using:
+```
+lib_deps = https://github.com/MrKevinWeiss/acc-dac161s997.git
+```
+
+### CMake
+There is a CMake module that can be used similar to the [CMakeLists.txt](examples/basic_desktop/CMakeLists.txt).
 
 ## Driver Porting
 
@@ -53,7 +61,9 @@ error_t dac161s997_spi_xfer(dac161s997_dev_t *dev, uint8_t* tx_buf,
 }
 ```
 
+## Examples
 
+A [basic example](examples/basic_desktop/) can be run on the desktop that mocks the spi data with user input.
 
 
 

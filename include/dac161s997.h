@@ -21,6 +21,11 @@
 #ifndef DAC161S997_H_
 #define DAC161S997_H_
 
+/* Includes *******************************************************************/
+#include <stdint.h>
+#include <errno.h>
+#include "dac161s997_types.h"
+
 /* Defines ********************************************************************/
 #define DAC161S997_MIN_NA   ((uint32_t)4000000)     /**< Min valid nA */
 #define DAC161S997_MAX_NA   ((uint32_t)20000000)    /**< Max valid nA */
@@ -52,18 +57,6 @@ typedef enum {
     DAC161S997_ALARM_HIGH_FAIL  = DAC161S997_ALARM_HI_FAIL_ERR,     /**< Alarm for high device failure */
 } DAC161S997_ALARM_t;       /**< DAC161S997 alarm types */
 
-/**
- * @addtogroup PORTABLE
- * @{
- * @brief	Forward declaration of the dac161s997_dev_t type.
- *
- * User implemented argument to select the dac161s997 chip.
- *
- * @Warning Must be defined during port!
- */
-typedef struct dac161s997_dev_t dac161s997_dev_t;
-/** @} */
-
 /* Function prototypes ********************************************************/
 /**
  * @brief   Initialize the dac161s997 chip.
@@ -81,7 +74,7 @@ typedef struct dac161s997_dev_t dac161s997_dev_t;
  * @return      -ENOEXEC		The device did get expected values
  * @return		errors from dac161s997_spi_xfer()
  */
-error_t dac161s997_init(dac161s997_dev_t *dev);
+int dac161s997_init(dac161s997_dev_t *dev);
 
 /**
  * @brief	Sets current in nA to output.
@@ -102,7 +95,7 @@ error_t dac161s997_init(dac161s997_dev_t *dev);
  * @return		-EINVAL		Value out of range
  * @return		errors from dac161s997_spi_xfer()
  */
-error_t dac161s997_set_output(dac161s997_dev_t *dev, int32_t n_amps);
+int dac161s997_set_output(dac161s997_dev_t *dev, int32_t n_amps);
 
 /**
  * @brief	Sets alarm values to output.
@@ -121,7 +114,7 @@ error_t dac161s997_set_output(dac161s997_dev_t *dev, int32_t n_amps);
  * @return		-EINVAL		Value out of range
  * @return		errors from dac161s997_spi_xfer()
  */
-error_t dac161s997_set_alarm(dac161s997_dev_t *dev, DAC161S997_ALARM_t alarm);
+int dac161s997_set_alarm(dac161s997_dev_t *dev, DAC161S997_ALARM_t alarm);
 
 /**
  * @brief	returns the status of an i420 device
@@ -137,31 +130,7 @@ error_t dac161s997_set_alarm(dac161s997_dev_t *dev, DAC161S997_ALARM_t alarm);
  * @return		0			Status update successful
  * @return		errors from dac161s997_spi_xfer()
  */
-error_t dac161s997_get_status(dac161s997_dev_t *dev, uint32_t *status);
-
-/**
- * @addtogroup PORTABLE
- * @{
- * @brief	Handles the SPI transfer to dac161s997 chip.
- *
- * This checks the status of the device to find out the device is still working
- * or the output line is still connected.
- *
- * @pre		Device must be initialized with dac161s997_init
- *
- * @param[in]	dev			Device to xfer
- * @param[in]	tx_buf		Bytes to send on MOSI
- * @param[out]	rx_buf		Bytes read from MISO
- * @param[in]	size		Number of bytes to xfer
- *
- * @return		0			Status update successful
- * @return      depends on user implementation
- *
- * @Warning Must be implemented during port!
- */
-error_t dac161s997_spi_xfer(dac161s997_dev_t *dev, uint8_t *tx_buf,
-                            uint8_t *rx_buf, size_t size);
-/** @} */
+int dac161s997_get_status(dac161s997_dev_t *dev, uint32_t *status);
 
 #endif /* DAC161S997_H_ */
 /** @} */

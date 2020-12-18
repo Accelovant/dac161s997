@@ -20,6 +20,11 @@
 #ifndef DAC161S997_REGS_H_
 #define DAC161S997_REGS_H_
 
+/* Includes *******************************************************************/
+#include <stdint.h>
+#include <errno.h>
+#include "dac161s997_types.h"
+
 /* Defines ********************************************************************/
 /**
  * @defgroup DAC161S997_REGS
@@ -57,7 +62,7 @@
  * @return      -ENOEXEC    The device did get expected values
  * @return      dac161s997_spi_xfer() defined errors
  */
-error_t dac161s997_read_reg(dac161s997_dev_t *dev, uint8_t addr,
+int dac161s997_read_reg(dac161s997_dev_t *dev, uint8_t addr,
                             uint16_t *data);
 
 /**
@@ -71,7 +76,7 @@ error_t dac161s997_read_reg(dac161s997_dev_t *dev, uint8_t addr,
  * @return      -ENOEXEC    The device did get expected values
  * @return      dac161s997_spi_xfer() defined errors
  */
-error_t dac161s997_write_reg(dac161s997_dev_t *dev, uint8_t addr,
+int dac161s997_write_reg(dac161s997_dev_t *dev, uint8_t addr,
                              uint16_t data);
 
 #endif /* DAC161S997_REGS_H_ */

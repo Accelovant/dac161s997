@@ -27,8 +27,8 @@
 #include "dac161s997_types.h"
 
 /* Defines ********************************************************************/
-#define DAC161S997_MIN_NA   ((uint32_t)4000000)     /**< Min valid nA */
-#define DAC161S997_MAX_NA   ((uint32_t)20000000)    /**< Max valid nA */
+#define DAC161S997_MIN_NA   ((uint32_t)2000000)     /**< Min valid nA */
+#define DAC161S997_MAX_NA   ((uint32_t)24000000)    /**< Max valid nA */
 
 #define DAC161S997_ALARM_LOW_FAIL_ERR   0x0100 /**< Error flag for low device failure */
 #define DAC161S997_ALARM_LOW_SAT_ERR    0x0200 /**< Error flag for value set to lower bound saturation */

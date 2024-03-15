@@ -21,6 +21,10 @@
 #ifndef DAC161S997_H_
 #define DAC161S997_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Includes *******************************************************************/
 #include <stdint.h>
 #include <errno.h>
@@ -131,6 +135,10 @@ int dac161s997_set_alarm(dac161s997_dev_t *dev, DAC161S997_ALARM_t alarm);
  * @return		errors from dac161s997_spi_xfer()
  */
 int dac161s997_get_status(dac161s997_dev_t *dev, uint32_t *status);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* DAC161S997_H_ */
 /** @} */

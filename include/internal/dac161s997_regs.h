@@ -20,6 +20,10 @@
 #ifndef DAC161S997_REGS_H_
 #define DAC161S997_REGS_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Includes *******************************************************************/
 #include <stdint.h>
 #include <errno.h>
@@ -78,6 +82,10 @@ int dac161s997_read_reg(dac161s997_dev_t *dev, uint8_t addr,
  */
 int dac161s997_write_reg(dac161s997_dev_t *dev, uint8_t addr,
                              uint16_t data);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* DAC161S997_REGS_H_ */
 /** @} */

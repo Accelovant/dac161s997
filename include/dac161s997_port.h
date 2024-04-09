@@ -17,6 +17,10 @@
 #ifndef DAC161S997_PORT_H_
 #define DAC161S997_PORT_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Includes *******************************************************************/
 #include <stdint.h>
 #include <errno.h>
@@ -48,6 +52,10 @@
 int dac161s997_spi_xfer(dac161s997_dev_t *dev, uint8_t *tx_buf,
                             uint8_t *rx_buf, size_t size);
 /** @} */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* DAC161S997_PORT_H_ */
 /** @} */
